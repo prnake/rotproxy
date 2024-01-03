@@ -1,0 +1,33 @@
+services:
+- name: rotary-proxy
+  addr: ":1080"
+  handler:
+    type: auto
+    chain: chain-0
+    retries: 10
+    auth:
+      username: USERNAME
+      password: PASSWORD
+  listener:
+    type: tcp
+chains:
+- name: chain-0
+  hops:
+  - name: hop-0
+hops:
+- name: hop-0
+  nodes:
+    - name: node-0
+      addr: 127.0.0.1:1080
+      connector:
+        type: socks5
+      dialer:
+        type: tcp
+  selector:
+    strategy: rand
+    maxFails: 1
+    failTimeout: 10s
+api:
+  addr: 127.0.0.1:18080
+  pathPrefix: /api
+  accesslog: true
