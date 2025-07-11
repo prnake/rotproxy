@@ -16,13 +16,13 @@ chains:
   - name: hop-0
 hops:
 - name: hop-0
-  nodes:
-    - name: node-0
-      addr: 127.0.0.1:1080
-      connector:
-        type: socks5
-      dialer:
-        type: tcp
+  nodes: []
+  reload: 10s
+  redis:
+    addr: 127.0.0.1:6379
+    db: 0
+    password: ""
+    key: gost:hops:hop-0:nodes
   selector:
     strategy: rand
     maxFails: 1
